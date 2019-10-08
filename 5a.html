@@ -1,0 +1,112 @@
+<html>
+<head>
+	<title>Amicable Numbers</title>
+	<script language="JavaScript">
+		function display()
+		{
+			var first = document.getElementById("num1").value;
+			var second = document.getElementById("num2").value;
+			document.write(first + " and " + second + ". ");
+			var first_array = getFactors(first);
+			var second_array = getFactors(second);
+			var first_sum = addFactors(first_array);
+			var second_sum = addFactors(second_array);
+			showFactors(first_array);
+			showFactors(second_array);
+			document.write("<br> First Sum: " + first_sum + "<br> Second Sum: " + second_sum + "<br>");
+			if (second_sum == first && first_sum == second)
+			{
+				document.write("The numbers are amicable!");
+			} else {
+				document.write("The numbers are not amicable.");
+			}
+		}
+		//input parameters = a number and test number
+		//return true if test number divdes evenly into the number
+		function isFactor(num, test)
+		{
+			if (num%test == 0) {
+				return true; 
+			}
+		}
+		//test code for isFactor
+		// if (isFactor(4, 2))
+		// {
+		// 	document.write("True!");
+		// }
+		// if (!isFactor(9, 6))
+		// {
+		// 	document.write("False!");
+		// }
+
+		//takes array as parameter
+		//displays all of its items
+		function showFactors(arr)
+		{
+			document.write("<br> Factors are: ");
+			for (var i = 0; i < arr.length; i++) 
+			{
+				document.write(arr[i] + " ");
+			}
+		}
+		//test code for showFactors
+		// var arrrr = new Array(1, 2, 3, 4, 5);
+		// showFactors(arrrr);
+
+		//takes array as parameter
+		//returns sum
+		function addFactors(arr)
+		{
+			var sum = 0;
+			for (var i = 0; i < arr.length; i++)
+			{
+				sum+=arr[i];
+			}
+			return sum;
+		}
+		//test code for addFactors
+		// var arrrr = new Array(1,2,3,4,5);
+		// if (addFactors(arrrr) == 15)
+		// {
+		// 	document.write(addFactors(arrrr));
+		// }
+
+		//takes a number as parameter
+		//returns an array with all possible factors
+		function getFactors(number)
+		{
+			var arr = new Array;
+			//found on w3resource (Math.floor and Math.sqrt)
+			//first tried i<parseInt(number/2) but was getting repeats
+			for (var i = 1; i<=Math.floor(Math.sqrt(number)); i++)
+			{
+				if (isFactor(number, i)) 
+				{
+					arr.push(i);
+					if (number/i != i && number/i != number) 
+					{
+						arr.push(number/i);
+					}
+				}
+			}
+			return arr;
+		}
+		//test code for getFactors
+		// var num = 10;
+		// var arrrr = getFactors(num);
+		// for (var i = 0; i <arrrr.length; i++)
+		// {
+		// 	document.write(arrrr[i] + " ");
+		// }
+	</script>
+</head>
+<body>
+	<form>
+		First Number: <input type="text" name="num1" id="num1"/>
+		<br>
+		Second Number: <input type="text" name="num2" id="num2"/>
+		<br>
+		<button onclick="display()">Submit</button>
+	</form>
+</body>
+</html>
